@@ -78,7 +78,6 @@ const products = [
   },
   // Hér gætum við bætt við fleiri vörum í byrjun.
 ];
-
 // Skilgreinum hluti sem halda utan um það sem notandi ætlar að kaupa.
 
 /**
@@ -137,6 +136,7 @@ function formatPrice(price) {
  */
 function validateInteger(num, min = 0, max = Infinity) {
   /* Útfæra */
+  return min <= num && num <= max;
 }
 
 /**
@@ -152,8 +152,12 @@ function validateInteger(num, min = 0, max = Infinity) {
  */
 function formatProduct(product, quantity = undefined) {
   /* Útfæra */
+ if (quantity && quantity > 1){
+  const total = product.price * quantity;
+  return '${product.title} - ${quantity}x${product.price} samtals ${total}';
+ }
+  
 }
-
 /**
  * Skila streng sem inniheldur upplýsingar um körfu.
  * @example
@@ -238,6 +242,7 @@ function addProduct() {
     description,
     price,
   };
+  console.log(product)
 
   // Bætum vörunni aftast við fylkið okkar.
   products.push(product);
